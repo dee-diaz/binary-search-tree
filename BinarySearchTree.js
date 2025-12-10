@@ -73,6 +73,22 @@ class Tree {
 
     this.root = removeNode(this.root, value);
   }
+
+  find(value) {
+    let currentNode = this.root;
+
+    while (currentNode) {
+      if (currentNode.data === value) return currentNode;
+
+      if (value < currentNode.data && currentNode.left !== null) {
+        currentNode = currentNode.left;
+      } else if (value > currentNode.data && currentNode.right !== null) {
+        currentNode = currentNode.right;
+      }
+    }
+
+    return null;
+  }
 }
 
 function buildTree(array) {
