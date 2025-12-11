@@ -171,6 +171,16 @@ class Tree {
     // Root
     callback(node);
   }
+
+  height(value) {
+    const node = this.find(value);
+    if (node === null) return null;
+
+    const leftHeight = node.left ? this.height(node.left.data) : -1;
+    const rightHeight = node.right ? this.height(node.right.data) : -1;
+
+    return 1 + Math.max(leftHeight, rightHeight);
+  }
 }
 
 function buildTree(array) {
