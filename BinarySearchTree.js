@@ -9,7 +9,7 @@ class Node {
 class Tree {
   constructor(array) {
     this.array = array;
-    this.root = buildTree();
+    this.root = buildTree(this.array);
   }
 
   insert(value) {
@@ -215,6 +215,21 @@ class Tree {
     const rightBalanced = this.#checkBalance(node.right);
 
     return heightDiff && leftBalanced && rightBalanced;
+  }
+
+  rebalance() {
+    const isBalanced = this.isBalanced();
+
+    if (!isBalanced) {
+      const arr = [];
+
+      this.inOrderForEach((node) => {
+        arr.push(node.data);
+      });
+
+      const newRoot = buildTree(arr);
+      this.root = newRoot;
+    }
   }
 }
 
