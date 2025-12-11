@@ -94,16 +94,28 @@ class Tree {
     if (!callback) throw new Error("A callback is required.");
     if (this.root === null) return;
 
-    const queue = [];
+    const queue = [this.root];
     let currentNode = this.root;
-    queue.push(currentNode);
 
+    // Iterative method
     while (queue.length > 0) {
       currentNode = queue.shift();
       callback(currentNode);
       if (currentNode.left) queue.push(currentNode.left);
       if (currentNode.right) queue.push(currentNode.right);
     }
+
+    // Recursive method
+    // this.#processQueue(queue, callback);
+  }
+
+  #processQueue(queue, callback) {
+    if (queue.length === 0) return;
+    const currentNode = queue.shift();
+    callback(currentNode);
+    if (currentNode.left) queue.push(currentNode.left);
+    if (currentNode.right) queue.push(currentNode.right);
+    this.#processQueue(queue, callback);
   }
 }
 
