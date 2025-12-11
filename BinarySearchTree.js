@@ -89,6 +89,22 @@ class Tree {
 
     return null;
   }
+
+  levelOrderForEach(callback) {
+    if (!callback) throw new Error("A callback is required.");
+    if (this.root === null) return;
+
+    const queue = [];
+    let currentNode = this.root;
+    queue.push(currentNode);
+
+    while (queue.length > 0) {
+      currentNode = queue.shift();
+      callback(currentNode);
+      if (currentNode.left) queue.push(currentNode.left);
+      if (currentNode.right) queue.push(currentNode.right);
+    }
+  }
 }
 
 function buildTree(array) {
