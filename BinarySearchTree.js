@@ -200,6 +200,22 @@ class Tree {
 
     return null;
   }
+
+  isBalanced() {
+    return this.#checkBalance(this.root);
+  }
+
+  #checkBalance(node) {
+    if (node === null) return true;
+    const leftHeight = this.height(node.left?.data);
+    const rightHeight = this.height(node.right?.data);
+    const heightDiff = Math.abs(leftHeight - rightHeight) <= 1;
+
+    const leftBalanced = this.#checkBalance(node.left);
+    const rightBalanced = this.#checkBalance(node.right);
+
+    return heightDiff && leftBalanced && rightBalanced;
+  }
 }
 
 function buildTree(array) {
