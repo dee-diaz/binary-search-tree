@@ -117,6 +117,33 @@ class Tree {
     if (currentNode.right) queue.push(currentNode.right);
     this.#processQueue(queue, callback);
   }
+
+  // Root -> Left subtree -> Right subtree
+  preOrderForEach(callback) {
+    if (!callback) throw new Error("A callback is required.");
+    if (this.root === null) return;
+
+    const stack = [this.root];
+
+    while (stack.length > 0) {
+      const currentNode = stack.pop();
+      callback(currentNode);
+      if (currentNode.right) stack.push(currentNode.right);
+      if (currentNode.left) stack.push(currentNode.left);
+    }
+  }
+
+  // Left subtree -> Root -> Right subtree
+  inOrderForEach(callback) {
+    if (!callback) throw new Error("A callback is required.");
+    if (this.root === null) return;
+  }
+
+  // Left subtree -> Right subtree -> Root
+  postOrderForEach(callback) {
+    if (!callback) throw new Error("A callback is required.");
+    if (this.root === null) return;
+  }
 }
 
 function buildTree(array) {
