@@ -207,8 +207,9 @@ class Tree {
 
   #checkBalance(node) {
     if (node === null) return true;
-    const leftHeight = this.height(node.left?.data);
-    const rightHeight = this.height(node.right?.data);
+
+    const leftHeight = node.left ? this.height(node.left.data) : -1;
+    const rightHeight = node.right ? this.height(node.right.data) : -1;
     const heightDiff = Math.abs(leftHeight - rightHeight) <= 1;
 
     const leftBalanced = this.#checkBalance(node.left);
@@ -250,3 +251,5 @@ function buildTree(array) {
 
   return rootNode;
 }
+
+export default Tree;
