@@ -158,6 +158,18 @@ class Tree {
   postOrderForEach(callback) {
     if (!callback) throw new Error("A callback is required.");
     if (this.root === null) return;
+
+    this.#postOrderRec(this.root, callback);
+  }
+
+  #postOrderRec(node, callback) {
+    if (node === null) return;
+    // Left subtree
+    this.#postOrderRec(node.left, callback);
+    // Right subtree
+    this.#postOrderRec(node.right, callback);
+    // Root
+    callback(node);
   }
 }
 
