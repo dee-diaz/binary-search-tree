@@ -181,6 +181,25 @@ class Tree {
 
     return 1 + Math.max(leftHeight, rightHeight);
   }
+
+  depth(value) {
+    let currentNode = this.root;
+    let steps = 0;
+
+    while (currentNode) {
+      if (currentNode.data === value) return steps;
+
+      if (value < currentNode.data) {
+        currentNode = currentNode.left;
+      } else {
+        currentNode = currentNode.right;
+      }
+
+      steps++;
+    }
+
+    return null;
+  }
 }
 
 function buildTree(array) {
