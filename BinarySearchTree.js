@@ -137,6 +137,21 @@ class Tree {
   inOrderForEach(callback) {
     if (!callback) throw new Error("A callback is required.");
     if (this.root === null) return;
+
+    const stack = [];
+    let currentNode = this.root;
+
+    while (stack.length > 0 || currentNode !== null) {
+      while (currentNode !== null) {
+        stack.push(currentNode);
+        currentNode = currentNode.left;
+      }
+
+      currentNode = stack.pop();
+      callback(currentNode);
+
+      currentNode = currentNode.right;
+    }
   }
 
   // Left subtree -> Right subtree -> Root
